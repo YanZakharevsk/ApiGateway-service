@@ -10,4 +10,8 @@ public class Path {
     public String LOGIN = "/api/auth/login";
 
     public String VALIDATE = "/api/auth/validate";
+
+    public String USERS = "/store/users";
+
+    public String USERS_WITH_ID = "/store/users/";
 }
