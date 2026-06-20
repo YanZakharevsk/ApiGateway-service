@@ -15,6 +15,8 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Component
 public class JwtAuthFilter implements GlobalFilter {
 
