@@ -14,6 +14,10 @@ WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
 
+<<<<<<< Updated upstream
 EXPOSE 8070G
+=======
+EXPOSE 8070
+>>>>>>> Stashed changes
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

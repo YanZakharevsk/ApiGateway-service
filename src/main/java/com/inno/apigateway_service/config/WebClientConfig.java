@@ -20,10 +20,10 @@ public class WebClientConfig {
     public WebClient.Builder webClientBuilder(){
 
         HttpClient httpClient = HttpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 3000)
-                .responseTimeout(Duration.ofMillis(3000))
-                .doOnConnected(conn -> conn.addHandlerFirst(new ReadTimeoutHandler(3000, TimeUnit.MILLISECONDS))
-                        .addHandlerLast(new WriteTimeoutHandler(3000, TimeUnit.MILLISECONDS)));
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
+                .responseTimeout(Duration.ofMillis(10000))
+                .doOnConnected(conn -> conn.addHandlerFirst(new ReadTimeoutHandler(10000, TimeUnit.MILLISECONDS))
+                        .addHandlerLast(new WriteTimeoutHandler(10000, TimeUnit.MILLISECONDS)));
 
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient));
