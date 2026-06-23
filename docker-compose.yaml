@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    image: api-gateway-service:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: ${SERVER_PORT}
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY}
+      AUTH_SERVICE_DOCKER_URL: ${AUTH_SERVICE_DOCKER_URL}
+      USER_SERVICE_DOCKER_URL: ${USER_SERVICE_DOCKER_URL}
+      ORDER_SERVICE_DOCKER_URL: ${ORDER_SERVICE_DOCKER_URL}
+      PAYMENT_SERVICE_DOCKER_URL: ${PAYMENT_SERVICE_DOCKER_URL}
+
+    healthcheck:
+      test: [ "CMD-SHELL" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+    networks:
+      - user-service-network
+      - auth-service-network
+      - order-service-network
+
+networks:
+  user-service-network:
+    external: true
+    name: user-service-network
+  auth-service-network:
+    external: true
+    name: auth-service-network
+  order-service-network:
+    external: true
+    name: order-service-network
